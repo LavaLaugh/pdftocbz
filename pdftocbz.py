@@ -20,7 +20,11 @@ for file in path:
     print("INFO: Zipping folder...")
     shutil.make_archive(folder, "zip", folder)
 
+    zip = folder + ".zip"
+
     print("INFO: Converting ZIP " + str(index) + " to CBZ...")
-    os.system("cbconvert convert --format avif --quality 48 --no-nonimage=true --outdir output/ " + folder + ".zip")
+    os.system("cbconvert convert --format avif --quality 48 --no-nonimage=true --outdir output/ " + zip)
 
     index += 1
+    shutil.rmtree(folder)
+    os.remove(zip)
