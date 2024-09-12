@@ -2,8 +2,9 @@ import glob
 import os
 import shutil
 
-path = glob.glob("*.pdf")
 print("INFO: Getting all PDF files...")
+path = glob.glob("*.pdf")
+path.sort()
 
 print("INFO: Creating output folder...")
 if not os.path.exists("output"):
