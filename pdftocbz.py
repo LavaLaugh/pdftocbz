@@ -1,6 +1,22 @@
 import glob
 import os
 import shutil
+import sys
+
+choice = input("Choose 1 for AVIF\nChoose 2 for WEBP")
+
+if choice == "1":
+    format = "avif"
+    quality = "48"
+
+elif choice == "2":
+    format = "webp"
+    quality = "55"
+
+else:
+    print("Wrong input, use any key to exit...")
+    sys.exit(0)
+
 
 print("INFO: Getting all PDF files...")
 path = glob.glob("*.pdf")
@@ -15,7 +31,7 @@ for file in path:
     folder = file.replace(".pdf", "")
     os.makedirs(folder)
 
-    print("INFO: Converting PDF " + str(index) + " to folder...")
+    print("INFO: Converting PDF " + folder + " to folder...")
     os.system("pdftoppm " + "-png " + file + " " + folder + "/img")
 
     print("INFO: Zipping folder...")
@@ -23,7 +39,7 @@ for file in path:
 
     zip = folder + ".zip"
 
-    print("INFO: Converting ZIP " + str(index) + " to CBZ...")
+    print("INFO: Converting ZIP " + folder + " to CBZ...")
     os.system("cbconvert convert --format avif --quality 48 --no-nonimage=true --outdir output/ " + zip)
 
     index += 1
