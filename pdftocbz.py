@@ -40,7 +40,7 @@ for file in path:
     zip = folder + ".zip"
 
     print("INFO: Converting ZIP " + folder + " to CBZ...")
-    os.system("cbconvert convert --format avif --quality 48 --no-nonimage=true --outdir output/ " + zip)
+    os.system("cbconvert convert --format " + format + " --quality " + quality + " --no-nonimage=true --outdir output/ " + zip)
 
     index += 1
     shutil.rmtree(folder)
