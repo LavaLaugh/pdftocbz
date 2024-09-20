@@ -26,6 +26,9 @@ print("INFO: Creating output folder...")
 if not os.path.exists("output"):
     os.makedirs("output")
 
+tempfile = "img-1.png"
+outpdf = "out.pdf"
+
 index = 1
 for file in path:
     folder = file.replace(".pdf", "")
@@ -38,9 +41,8 @@ for file in path:
     temppath.sort()
     pic = temppath[0]
     os.remove(pic)
-    tempfile = "img-1.png"
 
-    os.system("mutool convert -F pdf " + file + " 1")
+    os.system("mutool clean " + file + " " + outpdf + " 1")
     os.system("pdftoppm -png out.pdf img")
     shutil.copyfile(tempfile, folder + "/" + pic.split("/")[1])
 
@@ -57,4 +59,4 @@ for file in path:
     shutil.rmtree(folder)
     os.remove(zip)
     os.remove(tempfile)
-    os.remove("out.pdf")
+    os.remove(outpdf)
