@@ -34,6 +34,16 @@ for file in path:
     print("INFO: Converting PDF " + folder + " to folder...")
     os.system("pdftoppm " + "-png " + file + " " + folder + "/img")
 
+    temppath = glob.glob(folder + "/*")
+    temppath.sort()
+    pic = temppath[0]
+    os.remove(pic)
+    tempfile = pic.split("/")[1]
+
+    os.system("mutool convert -F png -o " + tempfile.replace("1", "") + " " + file + " 1")
+    shutil.copyfile(tempfile, folder + "/" + tempfile)
+
+
     print("INFO: Zipping folder...")
     shutil.make_archive(folder, "zip", folder)
 
@@ -45,3 +55,4 @@ for file in path:
     index += 1
     shutil.rmtree(folder)
     os.remove(zip)
+    os.remove(tempfile)
