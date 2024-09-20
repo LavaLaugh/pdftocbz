@@ -40,7 +40,7 @@ for file in path:
     os.remove(pic)
     tempfile = pic.split("/")[1]
 
-    os.system("pdftoppm -l 1 -png " + file + " img")
+    os.system("pdftoppm -l 1 -png -cropbox " + file + " img")
     shutil.copyfile(tempfile, folder + "/" + tempfile)
 
 
